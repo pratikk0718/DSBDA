@@ -1,0 +1,80 @@
+copy this code and put in the 
+
+# 1. Start Hadoop cluster
+start-all.sh
+
+# 2. Initialize Hive database schema (if needed)
+./schematool -dbType derby -initSchema
+
+# 3. Clear any stuck database locks
+rm ~/hive/bin/metastore_db/*.lck
+
+# 4. Start Hive Metastore in the background (press Enter after pasting)
+hive --service metastore &
+
+# 5. Connect to Hive via Beeline
+beeline -u jdbc:hive2:// -n username_ofpc
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- 1. BYPASS CLUSTER ERRORS (Session Settings)
+SET hive.execution.engine=mr;
+SET mapreduce.framework.name=local;
+SET hive.exec.mode.local.auto=true;
+SET hive.auto.convert.join=false;
+
+-- 2. CREATE AND SELECT DATABASE
+CREATE DATABASE IF NOT EXISTS flight_sys_final;
+USE flight_sys_final;
+
+-- 3. CREATE TABLES
+-- Create managed Carriers table
+CREATE TABLE IF NOT EXISTS carriers (
+    Code STRING,
+    Description STRING,
+    Country STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+-- Create external Flights table
+CREATE EXTERNAL TABLE IF NOT EXISTS flights_2008 (
+    Year INT, Month INT, DayofMonth INT, DayOfWeek INT,
+    DepTime INT, CRSDepTime INT, ArrTime INT, CRSArrTime INT,
+    UniqueCarrier STRING, FlightNum INT, TailNum STRING,
+    ActualElapsedTime INT, CRSElapsedTime INT, AirTime INT,
+    ArrDelay INT, DepDelay INT, Origin STRING, Dest STRING,
+    Distance INT, TaxiIn INT, TaxiOut INT, Cancelled INT,
+    CancellationCode STRING, Diverted INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LOCATION '/user/hive/warehouse/flight_data_2008_final'
+TBLPROPERTIES ("skip.header.line.count"="1");
+
+-- 4. INSERT DATA (Using Local Mode)
+-- Insert Carriers
+INSERT INTO TABLE carriers VALUES 
+  ('AA', 'American Airlines', 'USA'),
+  ('DL', 'Delta Air Lines', 'USA'),
+  ('UA', 'United Airlines', 'USA');
+
+-- Insert Flights
+INSERT INTO TABLE flights_2008 VALUES 
+  (2008, 1, 15, 2, 0, 0, 0, 0, 'AA', 101, 'N123', 0, 0, 0, 0, 45, 'JFK', 'LAX', 0, 0, 0, 0, '', 0),
+  (2008, 1, 15, 2, 0, 0, 0, 0, 'AA', 102, 'N124', 0, 0, 0, 0, 15, 'ORD', 'DFW', 0, 0, 0, 0, '', 0),
+  (2008, 1, 15, 2, 0, 0, 0, 0, 'DL', 201, 'N222', 0, 0, 0, 0, 90, 'ATL', 'MIA', 0, 0, 0, 0, '', 0),
+  (2008, 1, 16, 3, 0, 0, 0, 0, 'UA', 301, 'N333', 0, 0, 0, 0, 10, 'SFO', 'DEN', 0, 0, 0, 0, '', 0);
+
+-- 5. RUN ANALYSIS QUERIES
+-- Query 1: Join tables to see Delays by Airline Name
+SELECT f.UniqueCarrier, c.Description, f.DepDelay
+FROM flights_2008 f
+JOIN carriers c ON (f.UniqueCarrier = c.Code);
+
+-- Query 2: Find Average Departure Delay per Day in 2008
+SELECT Year, Month, DayofMonth, AVG(DepDelay) as avg_dep_delay
+FROM flights_2008
+WHERE Year = 2008
+GROUP BY Year, Month, DayofMonth
+ORDER BY Month, DayofMonth;
