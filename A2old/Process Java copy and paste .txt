@@ -1,0 +1,47 @@
+pwd
+
+========================================
+
+mkdir -p Process
+
+========================================
+
+gedit Process/Process.java
+
+========================================
+
+javac -classpath `hadoop classpath` -d . Process/Process.java
+
+========================================
+
+jar -cvf Process.jar Process/*.class
+
+========================================
+
+jps
+
+========================================
+
+hadoop fs -ls /
+
+========================================
+
+hadoop fs -put Desktop/Process.txt Process.txt
+
+========================================
+
+hadoop fs -cat Process.txt
+
+========================================
+
+hadoop fs -rm -r dir16
+
+========================================
+
+hadoop jar Process.jar Process.Process Process.txt dir16
+
+========================================
+
+hadoop fs -cat dir16/part-r-00000
+
+========================================
