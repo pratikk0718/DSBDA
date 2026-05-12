@@ -1,0 +1,9 @@
+start-all.sh
+
+javac --release 21 -classpath $(hadoop classpath) Process.java
+
+hdfs dfs -rm -r /user/pc_username/output
+
+yarn jar Process.jar Process /user/pc_username/input /user/pc_username/output
+
+hdfs dfs -cat /user/pc_username/output/part-*
