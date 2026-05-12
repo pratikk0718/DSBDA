@@ -1,0 +1,51 @@
+hive
+
+========================================
+
+create database mydb3;
+
+========================================
+
+use mydb3;
+
+========================================
+
+create table hive_int(
+id int,
+name varchar(10),
+sal float
+)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+========================================
+
+load data local inpath 'data.txt' into table hive_int;
+
+========================================
+
+select * from hive_int;
+
+========================================
+
+create external table hive_ext(
+id int,
+name varchar(10),
+sal float
+)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+========================================
+
+insert into hive_ext select * from hive_int;
+
+========================================
+
+select * from hive_ext;
+
+========================================
