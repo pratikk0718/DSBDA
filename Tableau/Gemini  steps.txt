@@ -1,0 +1,278 @@
+Tableau Visualization Guide
+
+Adult Dataset and Iris Dataset Visualizations
+
+This guide contains step-by-step instructions for creating all required Tableau visualizations using the Adult Dataset and Iris Dataset. 
+
+PART 1: Adult Dataset Visualizations
+
+Setup
+
+1. Open Tableau.
+2. Connect to your adult_dataset.xlsx file.
+3. Create a new worksheet for each visualization.
+
+A. 1D (Linear) Data Visualization
+
+Goal: Show Age Distribution
+
+Steps
+
+1. Drag the age measure to the Columns shelf.
+2. Click the Show Me button in the top-right corner.
+3. Select the Histogram icon.
+4. Tableau will automatically create age (bin) and display the histogram.
+
+B. 2D (Planar) Data Visualization
+
+Goal: Compare Average Hours Worked by Occupation
+
+Steps
+
+1. Drag the occupation dimension to the Columns shelf.
+2. Drag the hours.per.week measure to the Rows shelf.
+3. Right-click the hours.per.week pill.
+4. Select Measure → Average.
+5. Click the Sort Descending icon from the toolbar.
+
+C. 3D (Volumetric) Data Visualization
+
+Goal: Scatter Plot Using Size and Color
+
+Steps
+
+1. Drag age to Columns.
+2. Drag hours.per.week to Rows.
+3. Go to Analysis → Uncheck Aggregate Measures.
+4. Drag capital.gain to the Size box on the Marks card.
+5. Drag income to the Color box on the Marks card.
+
+D. Temporal Data Visualization
+
+Goal: Track Average Hours Worked Across Age
+
+Steps
+
+1. Drag age to the Columns shelf.
+2. Right-click the age pill.
+3. Set as Dimension.
+4. Ensure it is Continuous (Green Pill).
+5. Drag Capital GAin avg to the Rows shelf.
+6. Right-click hours.per.week.
+7. Select Measure → Average.
+8. On the Marks card, change Automatic to Line.
+
+E. Multidimensional Data Visualization
+
+Goal: Small Multiple Scatter Plots by Race and Sex
+
+Steps
+
+1. Drag age to Columns.
+2. Drag hours.per.week to Rows.
+3. Go to Analysis → Uncheck Aggregate Measures.
+4. Drag race to the Columns shelf and place it left of age.
+5. Drag sex to the Rows shelf and place it left of hours.per.week.
+6. Drag income to the Color box.
+
+F. Tree / Hierarchical Data Visualization
+
+Goal: Treemap of Workclass and Occupation
+
+Steps
+
+1. Drag workclass to the Detail box.
+2. Drag occupation to the Detail box.
+3. Drag adult_dataset (Count) to the Size box.
+4. Drag workclass to the Color box.
+5. Open Show Me.
+6. Select Treemap.
+
+G. Network Data Visualization
+
+Goal: Network Graph Visualization
+
+Prerequisite
+
+Use your generated file:
+tableau_network_data.csv
+
+Steps
+
+1. Connect the CSV file to Tableau.
+2. Drag X to Columns.
+3. Drag Y to Rows.
+4. Right-click both pills and change them to Dimension.
+5. On the Marks card, change dropdown to Line.
+6. Drag:
+   Path_ID → Detail
+   Point_Order → Path
+   Weight → Size
+
+Create Dual Axis
+
+7. Hold Ctrl (or Command on Mac).
+
+8. Duplicate the X pill by dragging it beside itself.
+
+9. Click the second X Marks card.
+
+10. Change mark type from Line to Circle.
+
+11. Remove:
+    Path
+    Detail
+    Size
+
+12. Drag:
+    Node_Type → Color
+    Node_Name → Label
+WEIGHT -> SIZE ..
+
+13. Right-click second X axis.
+
+14. Select Dual Axis.
+
+15. Right-click top axis.
+
+16. Select Synchronize Axis.
+==========================================================================================================================================
+
+PART 2: Iris Dataset Visualizations
+
+Setup
+
+1. Open Tableau.
+2. Connect to your iris_dataset.xlsx file.
+3. Create a new worksheet for each visualization.
+
+A. 1D (Linear) Data Visualization
+
+Goal: Show Petal Length Distribution
+
+Steps
+
+1. Drag petal_length to Columns.
+2. Open Show Me.
+3. Select Histogram.
+
+B. 2D (Planar) Data Visualization
+
+Goal: Compare Sepal Length and Sepal Width
+
+Steps
+
+1. Drag sepal_length to Columns.
+2. Drag sepal_width to Rows.
+3. Go to Analysis → Uncheck Aggregate Measures.
+4. Drag species to the Color box.
+
+ Change Marks type to Circle.
+
+C. 3D (Volumetric) Data Visualization
+
+Goal: Add Depth Using Sepal Width
+
+Steps
+
+1. Drag petal_length to Columns.
+2. Drag petal_width to Rows.
+3. Go to Analysis → Uncheck Aggregate Measures.
+4. Drag sepal_width to the Size box.
+5. Drag species to the Color box.
+Change Marks type to Circle.
+
+D. Temporal Data Visualization
+
+Goal: Growth Trend of Petal Width
+
+Steps
+
+1. Drag petal_length to the Columns shelf.
+2. Right-click the pill.
+3. Set as Dimension.
+4. Ensure it is Continuous.
+5. Drag petal_width to the Rows shelf.
+6. Right-click petal_width.
+7. Select Measure → Average.
+8. Change Marks type to Line.
+
+E. Multidimensional Data Visualization
+
+Goal: Scatter Plot by Species
+
+Steps
+
+1. Drag sepal_length to Columns.
+2. Drag sepal_width to Rows.
+3. Go to Analysis → Uncheck Aggregate Measures.
+4. Drag species to the Columns shelf and place it left of sepal_length.
+5. Drag species to the Color box.
+
+F. Tree / Hierarchical Data Visualization
+
+Goal: Treemap of Average Petal Length by Species
+
+Steps
+
+1. Drag species to the Detail box.
+2. Drag species to the Color box.
+3. Drag petal_length to the Size box.
+4. Right-click petal_length.
+5. Select Measure → Average.
+6. Open Show Me.
+7. Select Treemap.
+
+G. Network Data Visualization
+
+Goal: Iris Dataset Network Graph
+
+Prerequisite
+
+Use your generated file:
+tableau_iris_network.csv
+
+Steps
+
+1. Connect the CSV file to Tableau.
+2. Drag X to Columns.
+3. Drag Y to Rows.
+4. Right-click both pills and change to Dimension.
+5. On the Marks card, change mark type to Line.
+6. Drag:
+   Path_ID → Detail
+   Point_Order → Path
+   Weight → Size
+
+Create Dual Axis
+
+7. Hold Ctrl and duplicate X.
+
+8. Open second X Marks card.
+
+9. Change mark type to Circle.
+
+10. Remove:
+    Path
+    Detail
+    Size
+
+11. Drag:
+    Node_Type → Color
+    Node_Name → Label
+
+12. Right-click second X axis.
+
+13. Select Dual Axis.
+
+14. Right-click top axis.
+
+15. Select Synchronize Axis.
+
+Final Notes
+
+1. Create a separate worksheet for every visualization.
+2. Save the Tableau workbook properly.
+3. Ensure all fields are correctly assigned.
+4. Use labels and colors for better presentation.
+5. Verify all graphs before submission.

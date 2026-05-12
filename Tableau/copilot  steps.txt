@@ -1,0 +1,309 @@
+# Tableau Visualization Guide
+
+## Adult Dataset Visualizations
+
+### Dataset Connection
+
+1. Open Tableau.
+2. Connect to `adult_dataset.xlsx`.
+3. Load the dataset into Tableau.
+
+---
+
+## A. 1D (Linear) Visualization
+
+### Objective
+
+Show the distribution of Age using a histogram/bar chart.
+
+### Steps
+
+1. Drag **Age** → **Columns**.
+2. Set **Marks** = **Bar**.
+3. Adjust bin size if required.
+4. Observe the distribution of Age values.
+
+---
+
+## B. 2D (Planar) Visualization
+
+### Objective
+
+Visualize the relationship between Age and HoursPerWeek.
+
+### Steps
+
+1. Drag **Age (Continuous)** → **Columns**.
+2. Drag **HoursPerWeek (Continuous)** → **Rows**.
+3. Set **Marks** = **Circle**.
+4. Drag **Education** → **Color**.
+5. Analyze the planar relationship between variables.
+
+---
+
+## C. 3D (Volumetric) Visualization (Simulated)
+
+### Objective
+
+Simulate a 3D visualization using size and color dimensions.
+
+### Steps
+
+1. Drag **Age** → **Columns**.
+2. Drag **HoursPerWeek** → **Rows**.
+3. Set **Marks** = **Circle**.
+4. Drag **Education** → **Color**.
+5. Drag **CapitalGain** → **Size**.
+6. Analyze the volumetric representation.
+
+---
+
+## D. Temporal Visualization
+
+### Objective
+
+Show dataset trends over time.
+
+### Steps
+
+1. Use **Year** field if available.
+2. If not available, create a synthetic date field.
+3. Drag **Year** → **Columns**.
+4. Drag **Count of Records** → **Rows**.
+5. Set **Marks** = **Line**.
+6. Observe variations across time.
+
+---
+
+## E. Multidimensional Visualization
+
+### Objective
+
+Visualize multiple dimensions together.
+
+### Steps
+
+1. Drag **Age** → **Columns**.
+2. Drag **HoursPerWeek** → **Rows**.
+3. Drag **Education** → **Color**.
+4. Drag **CapitalGain** → **Size**.
+5. Drag **Gender** → **Shape**.
+6. Analyze multidimensional patterns.
+
+---
+
+## F. Tree / Hierarchical Visualization
+
+### Objective
+
+Create a hierarchical Tree Map visualization.
+
+### Steps
+
+1. Create hierarchy:
+
+   * **Education → Occupation**
+2. Select **Tree Map** from Show Me.
+3. Drag **Count of Records** → **Size**.
+4. Drag **Education** → **Color**.
+5. Analyze hierarchical relationships.
+
+---
+
+## G. Network Visualization
+
+### Objective
+
+Visualize network relationships using preprocessed coordinates.
+
+### Required File
+
+`adult2net_with_xy.xlsx`
+
+### Required Fields
+
+* Path_ID
+* Point_Order
+* Node_Name
+* Node_Type
+* Weight
+* Path_Name
+* X
+* Y
+
+### Steps
+
+1. Connect to `adult2net_with_xy.xlsx`.
+2. Drag **X (Continuous)** → **Columns**.
+3. Drag **Y (Continuous)** → **Rows**.
+4. Set **Marks** = **Line**.
+5. Drag **Point_Order (Discrete)** → **Path**.
+6. Drag **Path_ID (Discrete)** → **Detail**.
+7. Drag **Node_Type** → **Color**.
+8. Drag **Weight** → **Size**.
+9. Drag **Node_Name** → **Label**.
+10. Drag **Path_Name** → **Tooltip**.
+11. (Optional) Use **Dual Axis** to overlay circles for nodes.
+
+---
+
+---
+
+# Iris Dataset Visualizations
+
+## Dataset Connection
+
+1. Open Tableau.
+2. Connect to `iris.xlsx`.
+3. Load the dataset into Tableau.
+
+---
+
+## A. 1D (Linear) Visualization
+
+### Objective
+
+Show the distribution of Sepal Length.
+
+### Steps
+
+1. Drag **SepalLength** → **Columns**.
+2. Set **Marks** = **Bar**.
+3. Observe the distribution of Sepal Length.
+
+---
+
+## B. 2D (Planar) Visualization
+
+### Objective
+
+Visualize the relationship between Sepal Length and Sepal Width.
+
+### Steps
+
+1. Drag **SepalLength** → **Columns**.
+2. Drag **SepalWidth** → **Rows**.
+3. Set **Marks** = **Circle**.
+4. Drag **Species** → **Color**.
+5. Analyze the planar distribution.
+
+---
+
+## C. 3D (Volumetric) Visualization (Simulated)
+
+### Objective
+
+Simulate 3D visualization using color and size.
+
+### Steps
+
+1. Drag **SepalLength** → **Columns**.
+2. Drag **SepalWidth** → **Rows**.
+3. Set **Marks** = **Circle**.
+4. Drag **Species** → **Color**.
+5. Drag **PetalLength** → **Size**.
+6. Analyze the volumetric representation.
+
+---
+
+## D. Temporal Visualization
+
+### Objective
+
+Show trends across records using a synthetic index.
+
+### Steps
+
+1. Create a synthetic **Index** field (Row ID).
+2. Drag **Index** → **Columns**.
+3. Drag **SepalLength** → **Rows**.
+4. Set **Marks** = **Line**.
+5. Observe record trends.
+
+---
+
+## E. Multidimensional Visualization
+
+### Objective
+
+Visualize multiple dimensions together.
+
+### Steps
+
+1. Drag **SepalLength** → **Columns**.
+2. Drag **SepalWidth** → **Rows**.
+3. Drag **Species** → **Color**.
+4. Drag **PetalLength** → **Size**.
+5. Drag **PetalWidth** → **Shape**.
+6. Analyze multidimensional relationships.
+
+---
+
+## F. Tree / Hierarchical Visualization
+
+### Objective
+
+Create a Tree Map hierarchy visualization.
+
+### Steps
+
+1. Create hierarchy:
+
+   * **Species → PetalLength**
+2. Select **Tree Map** from Show Me.
+3. Drag **PetalLength** → **Size**.
+4. Drag **Species** → **Color**.
+5. Analyze hierarchical relationships.
+
+---
+
+## G. Network Visualization
+
+### Objective
+
+Create a network visualization using source-target relationships.
+
+### Required Preprocessed File
+
+The file must contain:
+
+* Path_ID
+* Point_Order
+* Node_Name
+* Node_Type
+* Weight
+* Path_Name
+* X
+* Y
+
+### Steps
+
+1. Connect to the preprocessed network dataset.
+2. Drag **X (Continuous)** → **Columns**.
+3. Drag **Y (Continuous)** → **Rows**.
+4. Set **Marks** = **Line**.
+5. Drag **Point_Order (Discrete)** → **Path**.
+6. Drag **Path_ID (Discrete)** → **Detail**.
+7. Drag **Node_Type** → **Color**.
+8. Drag **Weight** → **Size**.
+9. Drag **Node_Name** → **Label**.
+10. Drag **Path_Name** → **Tooltip**.
+11. (Optional) Use **Dual Axis** to overlay circles for nodes.
+
+---
+
+# Conclusion
+
+This guide covers:
+
+* 1D Visualization
+* 2D Visualization
+* 3D (Simulated) Visualization
+* Temporal Visualization
+* Multidimensional Visualization
+* Tree / Hierarchical Visualization
+* Network Visualization
+
+for both the Adult Dataset and Iris Dataset in Tableau.
+
+The steps are organized sequentially for easy practical implementation and viva preparation.
